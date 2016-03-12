@@ -1,0 +1,210 @@
+// FLUID GRID
+// ==========================================================================
+// Extracted from Zurb's Foundation framework (v3.1.0)
+// (http://foundation.zurb.com/ | https://github.com/zurb/foundation)
+
+// Grid Measurements, customize away.
+// --------------------------------------------------------------------------
+$rowWidth: 				1173px;
+$screenSmall:			768px ; 	//min-width for rows, switch to single columns
+$columnGutter: 			50px;	
+$totalColumns: 			12;	
+$totalColumnsSmall: 	4;			//alternate grid for small screens
+
+// Grid Helper Functions
+// --------------------------------------------------------------------------
+
+@function convert-number-to-word($num) {
+  $count:1;
+  @each $word in one,two,three,four,five,six,seven,eight,nine,ten,eleven,
+    twelve,thirteen,fourteen,fifteen,sixteen,seventeen,eighteen,nineteen,
+    twenty,twentyone,twentytwo,twentythree,twentyfour{
+    @if ($count == $num) { @return $word; }
+    $count: $count + 1;
+  }
+  @return "invalid";
+}
+
+
+// The Grid
+// --------------------------------------------------------------------------
+.row { 
+	width: $rowWidth; 
+	max-width: 100%; 
+	min-width: $screenSmall; 
+	margin: 0 auto;
+	@extend %clearfix;
+	
+	.row { 
+		width: auto; 
+		max-width: none; 
+		min-width: 0; 
+		margin: 0 (-($columnGutter/2)); 
+	}
+}
+
+.column, 
+.columns { 
+	float: left; 
+	min-height: 1px;
+	padding: 0 ($columnGutter/2); 
+	position: relative;
+	
+	&.centered { 
+		float: none; 
+		margin: 0 auto; 
+	}
+}
+
+[class*="column"] + [class*="column"]:last-child { float: right; }
+[class*="column"] + [class*="column"].end { float: left; }
+
+// Creating column classes
+@for $i from 1 through $totalColumns {
+	.#{convert-number-to-word($i)} { width: percentage($i / $totalColumns); }
+}
+
+// Creating .row-# classes
+@for $i from 1 through $totalColumns {
+	.row {
+	 .#{convert-number-to-word($i)} { @extend .#{convert-number-to-word($i)}; }
+	}
+}
+
+// Creating .row .offset-by-# classes
+@for $i from 1 through $totalColumns - 2 {
+	.row {
+	  .offset-by-#{convert-number-to-word($i)} { margin-left: percentage($i / $totalColumns); }
+	}
+}
+
+// Creating .row .push-# classes
+@for $i from 2 through $totalColumns - 2 {
+	.push-#{convert-number-to-word($i)} { left: percentage($i / $totalColumns); }
+	.pull-#{convert-number-to-word($i)} { right: percentage($i / $totalColumns); }
+}
+
+
+/* Mobile Grid and Overrides ---------------------- */
+
+@media only screen and (max-width: $screenSmall - 1) {
+	body { -webkit-text-size-adjust: none; -ms-text-size-adjust: none; width: 100%; min-width: 0; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
+
+	.row { width: auto; min-width: 0; margin-left: 0; margin-right: 0; }
+	.column, .columns { width: auto !important; float: none; }
+	.column:last-child, .columns:last-child { float: none; }
+	[class*="column"] + [class*="column"]:last-child { float: none; }
+	.column:before, .columns:before, .column:after, .columns:after { content:""; display:table; }
+	.column:after, .columns:after { clear: both; }
+
+	// Placeholder classes for mobile grid overrides
+	%no-default-margin { margin-left: 0 !important; }
+	%default-auto { left: auto; }
+	%opposite-auto { right: auto; }
+
+	@for $i from 1 through $totalColumns - 2 {
+  		.offset-by-#{convert-number-to-word($i)} { @extend %no-default-margin; }
+	}
+	@for $i from 2 through $totalColumns - 2 {
+  		.push-#{convert-number-to-word($i)} { @extend %default-auto; }
+  		.pull-#{convert-number-to-word($i)} { @extend %opposite-auto; }
+	}
+
+	/* Mobile 4-column Grid */
+	@for $i from 1 through $totalColumnsSmall {
+  		.row {
+    		.mobile-#{convert-number-to-word($i)} { 
+    			width: gridCalc($i, $totalColumnsSmall) !important; 
+    			float: left; 
+    			padding: 0 ($columnGutter/2);
+      			
+      			&:last-child { float: right; }
+    		}
+
+	    	&.collapse {
+	      		.mobile-#{convert-number-to-word($i)} { padding: 0; }
+	    	}
+	  	}
+	}
+
+	@for $i from 1 through $totalColumnsSmall - 1 {
+	  .push-#{convert-number-to-word($i)}-mobile { left: gridCalc($i, $totalColumnsSmall); }
+	  .pull-#{convert-number-to-word($i)}-mobile { right: gridCalc($i, $totalColumnsSmall); }
+	}
+}
+
+//// Block Grids 
+// //--------------------------------------------------
+/////These are 2-up, 3-up, 4-up and 5-up ULs, suited
+////for repeating blocks of content. Add 'mobile' to
+////them to switch them just like the layout grid
+////(one item per line) on phones
+////
+////For IE7/8 compatibility block-grid items need to be
+////the same height. You can optionally uncomment the
+////lines below to support arbitrary height, but know
+////that IE7/8 do not support :nth-child.
+////--------------------------------------------------
+//
+//.block-grid { display: block; overflow: hidden; padding: 0;
+//
+//	&>li { display: block; height: auto; float: left; }
+//	&.one-up { margin: 0; 
+//	  &>li { width: 100%; padding: 0 0 15px; }
+//	}
+//
+//	&.two-up { margin: 0 -15px; 
+//	  &>li { width: 50%; padding: 0 15px 15px; 
+//	    &:nth-child(2n+1) { clear: both; }
+//	  }
+//	}
+//
+//	&.three-up { margin: 0 -12px; 
+//	  &>li { width: 33.33%; padding: 0 12px 12px; 
+//	    &:nth-child(3n+1) { clear: both; }
+//	  }
+//	}
+//
+//	&.four-up { margin: 0 -10px; 
+//	  &>li { width: 25%; padding: 0 10px 10px; 
+//	    &:nth-child(4n+1) { clear: both; }
+//	  }
+//	}
+//
+//	&.five-up { margin: 0 -8px; 
+//	  &>li { width: 20%; padding: 0 8px 8px; 
+//	    &:nth-child(5n+1) { clear: both; }
+//	  }
+//	}
+//}
+//
+//// Mobile Block Grids
+//@media only screen and (max-width: $screenSmall - 1) {
+//	.block-grid.mobile {
+//	  &>li { float: none; width: 100%; margin-left: 0; }
+//	}
+//
+//	.block-grid {
+//	  &>li { clear: none !important; }
+//	  &.mobile-two-up>li { width: 50%; 
+//	    &:nth-child(2n+1) { clear: both; }
+//	  }
+//
+//	  &.mobile-three-up>li { width: 33.33%; 
+//	    &:nth-child(3n+1) { clear: both !important; }
+//	  }
+//
+//	  &.mobile-four-up>li { width: 25%;
+//	    &:nth-child(4n+1) { clear: both; }
+//	  }
+//
+//	  &.mobile-five-up>li {
+//	    &:nth-child(5n+1) { clear: both; }
+//	  }
+//	}
+//}
+//
+
+
+
+

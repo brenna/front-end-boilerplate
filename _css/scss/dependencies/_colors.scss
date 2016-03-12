@@ -1,0 +1,79 @@
+// COLOURS
+// =================================================
+
+//=============================================================================
+//  Colours!
+// ============================================================================
+$textColorDark: 		#333333;
+$textColorLight:		#efefef;
+
+$bgColorLight:			#e7e4e4;	// light netural			
+$bgColorDark:			#212121;	// dark neutral
+
+$baseColor:				#d33737; 	// predominant non-neutral design colour
+$accentColor: 			#38adae; 	// usually for links and buttons
+
+// Setup other custom colours you might beed here here
+// eg: $red: #ff0000;
+
+// Default Values
+$linkColor:				$accentColor;
+$linkHoverColor:		lighten($linkColor, 5); 
+
+$buttonColor: 			$accentColor;
+
+$defaultGradientBottom:	$bgColorDark;
+$defaultGradientTop:	lighten($bgColorDark, 10);
+
+
+//=============================================================================
+//  Linear Gradients
+// ============================================================================
+// Background image, position and repeat are optional.
+// Use them to get image + gradient using css multiple backgrounds. 
+// Works well for texture overlays!
+
+@mixin linear-gradient($c1: $defaultGradientTop, $c2: $defaultGradientBottom, $c1pos: 0%, $c2pos: 100%, $img-path: "", $img-pos: "", $img-repeat: "") {
+	@if $img-path == "" {
+		background: $c1; // Old browsers 
+  		background-image: -moz-linear-gradient(top,  $c1 $c1pos, $c2 $c2pos); // FF3.6+
+  		background-image: -webkit-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // Chrome10+,Safari5.1+
+  		background-image: -o-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // Opera 11.10+
+  		background-image: -ms-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // IE10+
+	} @else {
+		background: $c1 url(#{$img-path}); // Old browsers 
+  		background-image: url(#{$img-path}), -moz-linear-gradient(top,  $c1 $c1pos, $c2 $c2pos); // FF3.6+
+  		background-image: url(#{$img-path}), -webkit-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // Chrome10+,Safari5.1+
+  		background-image: url(#{$img-path}), -o-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // Opera 11.10+
+  		background-image: url(#{$img-path}), -ms-linear-gradient(top,  $c1 $c1pos,$c2 $c2pos); // IE10+
+  		@if $img-pos != "" { background-position: $img-pos }
+  		@if $img-repeat != "" {background-repeat: $img-repeat}
+	}
+  
+}
+
+
+//=============================================================================
+//  Background Panel Generator Mixin
+// ============================================================================
+// Options: 
+// $name: string, used to create a custom class name ".panel-name"
+// $color: hex, background color
+// $img-path: string, path to background image [optional] 
+// $text-color: text color [optional - only use if you need to over-ride default]
+
+// Usage eg: @include background-panel("dark", #000, "/_images/bg-texture.png", #fff);
+
+// TODO: add gradient support? multiple bg images if both grad and img specified
+
+@mixin background-panel ($name, $color, $img-path, $text-color) {
+	.panel-#{$name} {
+		@if $text-color != "" {color: $text-color;}
+		@if $img-path == "" {
+			background: $color;	
+		} @else {
+			background: $color url(#{$img-path});
+		}
+		
+	}
+}

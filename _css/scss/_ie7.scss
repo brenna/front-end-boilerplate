@@ -1,0 +1,18 @@
+// IE7 fixes
+// ==========================================================================
+// If you requrie IE7 support, this should help resolve a few headaches.
+
+
+// Inline block for er'body
+// --------------------------------------------------------------------------
+@mixin inline-block {
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+	*vertical-align: top;
+}
+
+
+// Better resampling for scaled down images
+// --------------------------------------------------------------------------
+img { -ms-interpolation-mode: bicubic}

@@ -1,0 +1,68 @@
+// PROJECT NAME
+// =================================================
+// (inspired by Jina Bolton's SASS file structure)
+
+
+// 01 RESET
+// -------------------------------------------------
+
+@import "_normalize.scss";
+
+
+// 02 DEPENDENCIES
+// -------------------------------------------------
+// Vars and mixins only here!
+// These files should never output any CSS on their own.
+
+@import "dependencies/_colors.scss";
+@import "dependencies/_measurement.scss";
+@import "dependencies/_typography.scss";
+@import "dependencies/_layout.scss";
+
+
+// 03 FOUNDATION
+// -------------------------------------------------
+
+@import "_foundation.scss";
+
+
+// 04 LAYOUT
+// -------------------------------------------------
+//take yer pick: IE7 support or not
+
+//@import "_grid.scss";
+@import "_grid-ie7.scss";
+@import "_helpers.scss";
+
+// 05 COMPONENTS
+// -------------------------------------------------
+
+@import "components/_forms.scss";
+@import "components/_buttons.scss";
+//@import "components/_flexslider.scss";
+//@import "components/_messaging.scss";
+
+
+// 06 THEMES
+// -------------------------------------------------
+
+//@import "themes/_light.scss";
+//@import "themes/_dark.scss";
+
+
+// 08 REGIONS
+// -------------------------------------------------
+//A few necessary site specific styles
+@import "regions/_header.scss";
+@import "regions/_footer.scss";
+//etc.
+
+
+// 09 MISC
+// -------------------------------------------------
+//if you must...
+@import "_ie7.scss";
+
+
+
+

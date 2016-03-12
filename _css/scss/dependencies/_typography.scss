@@ -1,0 +1,31 @@
+// TYPOGRAPHY
+// =================================================
+
+// FONT EMBED MIXINS
+// -------------------------------------------------
+
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal ) {
+  @font-face {
+      font-family: $font-family;
+      src: url('#{$file-path}.eot');
+      src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+           url('#{$file-path}.woff') format('woff'),
+           url('#{$file-path}.ttf') format('truetype');
+      font-weight: $weight;
+      font-style: $style;
+  }
+}
+
+
+// SPECIAL STYLES
+// -------------------------------------------------
+
+// punch copy
+%punch {
+	//eg. italic, different colour, bigger font size...
+}
+
+//meta info, eg. dates
+%meta {
+	//eg. smaller font, all caps, different colour
+}

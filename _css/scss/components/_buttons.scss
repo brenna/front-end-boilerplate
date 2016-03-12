@@ -1,0 +1,15 @@
+// BUTTONS
+// ==========================================================================
+
+// Standard Buttons
+// --------------------------------------------------------------------------
+
+.button {
+	display: inline-block;
+	padding: $buttonPadding;
+	background: $buttonColor;
+	border-radius: $buttonBorderRadius;
+	line-height: 1;
+	text-align: center;
+	color: $textColorLight;	
+}

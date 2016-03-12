@@ -1,0 +1,191 @@
+// Base HTML Styles
+// ==========================================================================
+// No Styling with Classes or ID's here! 
+// Most of this based on normalize.css (git.io/normalize)
+// Customized and Sassified by Brenna
+
+
+// ==========================================================================
+// Typography
+// ==========================================================================
+
+// 1. Corrects text resizing oddly in IE 6/7 when body `font-size` is set using
+//    `em` units.
+// 2. Prevents iOS text size adjust after orientation change, without disabling
+//    user zoom.
+// --------------------------------------------------------------------------
+
+html {
+    font-size: $bodyFontSize; // 1
+    -webkit-text-size-adjust: $bodyFontSize; // 2
+    -ms-text-size-adjust: $bodyFontSize; // 2
+}
+
+// Addresses `font-family` inconsistency between `textarea` and other form
+// elements.
+// --------------------------------------------------------------------------
+
+html,
+button,
+input,
+select,
+textarea {
+    font-family: sans-serif;
+}
+
+
+// LINKS
+// --------------------------------------------------------------------------
+a {
+    text-decoration: none;
+    color: $linkColor;
+
+    //use hover style for active and focussed state
+    &:hover,
+    &:active,
+    &:focus {
+        outline: none;
+        color: $linkHoverColor;
+    }
+}
+
+// HEADINGS
+// --------------------------------------------------------------------------
+// Note: use the secondary classes for headings that need to be sized outside
+// of the typical heirarchy. (credit: Harry Roberts/CSS Wizardry: 
+// http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/)
+
+h1, .alpha { 
+    font-size: $h1Size;
+    margin: 0 0 $h1Spacer 0;
+}
+
+h2, .beta {
+    font-size: $h2Size;
+    margin: 0 0 $h2Spacer 0;
+}
+
+h3, .gamma {
+    font-size: $h3Size;
+    margin: 0 0 $h3Spacer 0;
+}
+
+h4, .delta {
+    font-size: $h4Size;
+    margin: 0 0 $h4Spacer 0;
+}
+
+h5, .epsilon {
+    font-size: $h5Size;
+    margin: 0 0 $h5Spacer 0;
+}
+
+h6, .zeta {
+    font-size: $h6Size;
+    margin: 0 0 $h6Spacer 0;
+}
+
+
+// Addresses styling not present in IE 7/8/9, Safari 5, and Chrome.
+abbr[title] { border-bottom: 1px dotted;}
+
+
+// Addresses style set to `bolder` in Firefox 3+, Safari 4/5, and Chrome.
+b,
+strong { font-weight: bold;}
+
+blockquote { margin:0 $quoteIndent $quoteSpacer;}
+
+
+// Corrects font family set oddly in IE 6, Safari 4/5, and Chrome.
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, serif;
+    _font-family: 'courier new', monospace;
+    font-size: 1em;
+}
+
+
+// Addresses styling not present in Safari 5 and Chrome.
+dfn { font-style: italic;}
+
+mark {
+    background: #ff0;
+    color: #000;
+}
+
+p,
+pre { margin: 0 0 $pSpacer 0;}
+
+
+// Improves readability of pre-formatted text in all browsers.
+pre {
+    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+// Addresses CSS quotes not supported in IE 6/7.
+q { quotes: none;}
+
+
+// Addresses `quotes` property not supported in Safari 4.
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+
+// Addresses inconsistent and variable font size in all browsers.
+small { font-size: 80%;}
+
+
+// Prevents `sub` and `sup` affecting `line-height` in all browsers.
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sup { top: -0.5em;}
+
+sub { bottom: -0.25em;}
+
+
+// ==========================================================================
+//  Lists
+// ==========================================================================
+
+dl, menu, ol, ul { margin: 0 0 $listSpacer;}
+
+    //remove bottom margins on nested lists
+    li > ul, li > ol { margin-bottom: 0;}
+
+    dd { margin: 0 0 0 $listIndent; }
+
+menu, ol, ul { padding: 0 0 0 $listIndent;}
+
+nav ul, 
+nav ol {
+    list-style: none;
+    list-style-image: none;
+}
+
+
+
+// ==========================================================================
+// Flexible Media
+// ==========================================================================
+img, object, embed, video {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
